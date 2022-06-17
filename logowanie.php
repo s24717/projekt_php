@@ -12,7 +12,7 @@
 
     <form action="zaloguj.php" method="post">
     Login: <br/><input type="text" name="login"/> <br/>
-    HaslodaaasdS: <br/><input type="password" name="login"/> <br/>
+    Haslo: <br/><input type="password" name="haslo"/> <br/>
     <input type="submit" value="Zaloguj sie" />
     </form>
 
