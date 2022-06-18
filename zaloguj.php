@@ -23,7 +23,7 @@
         $login = htmlentities($login, ENT_QUOTES, "UTF-8");
 		$haslo = htmlentities($haslo, ENT_QUOTES, "UTF-8");
 
-        $sql = "SELECT * FROM uzytkownicy WHERE user='$login' AND pass='$haslo'";
+        
 
         if ($rezultat = @$polaczenie->query(
             sprintf("SELECT * FROM uzytkownicy WHERE user='%s' AND pass='%s'",
