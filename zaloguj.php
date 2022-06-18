@@ -20,9 +20,15 @@
         $login = $_POST['login'];
         $haslo = $_POST['haslo'];
 
+        $login = htmlentities($login, ENT_QUOTES, "UTF-8");
+		$haslo = htmlentities($haslo, ENT_QUOTES, "UTF-8");
+
         $sql = "SELECT * FROM uzytkownicy WHERE user='$login' AND pass='$haslo'";
 
-        if($rezultat = @$polaczenie->query($sql))
+        if ($rezultat = @$polaczenie->query(
+            sprintf("SELECT * FROM uzytkownicy WHERE user='%s' AND pass='%s'",
+            mysqli_real_escape_string($polaczenie,$login),
+            mysqli_real_escape_string($polaczenie,$haslo))))//ta funkcja zabezpiecza nasze zapytanie w przypadku wstrzykiwaniu sql
         {
             $ilu_userow = $rezultat->num_rows;
 
