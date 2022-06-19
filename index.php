@@ -43,7 +43,9 @@
 			<div class="option">
 				<a href="logowanie.php" class="tilelink">Logowanie</a>
 			</div>
-			<div class="option">Rejestracja</div>
+			<div class="option">
+			<a href="rejestracja.php" class="tilelink">Rejestracja</a>
+			</div>
 			<div style="clear:both;"></div>
 		</div>
 		
