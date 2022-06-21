@@ -41,7 +41,8 @@
                 
                 ?>
         </div>
-        <p>Nie masz konta? <a class="fpwd" href="rejestracja.php">Zarejestruj Sie!</a></p>
+        <p>Nie masz konta? <a class="fpwd" href="rejestracja.php">Zarejestruj Sie! </a>lub <a class="fpwd" href="index.php">Strona Glowna</a></p>
+        
     </div>
 
 </body>

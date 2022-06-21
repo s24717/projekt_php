@@ -77,6 +77,8 @@ body
 	background-color: #dedede;
 	min-height: 580px;
 	text-align: justify;
+	display: grid;
+  	grid-template-columns: auto auto;
 }
 
 #footer
@@ -105,6 +107,8 @@ body
 	font-size: 18px;
 }
 
+
+
 .wyszukiwarka
 {
     min-width: 570px;
@@ -117,16 +121,17 @@ body
 	
 }
 
-form {
-	
+form 
+{
 	display: flex;
 	padding: 2px;
 	border: 1px;
-	;
 	border-radius: 5px;
-  }
+	
+}
 
-  input[type="submit"] {
+input[type="submit"] 
+{
 	text-indent: -999px;
 	overflow: hidden;
 	width: 40px;
@@ -138,7 +143,9 @@ form {
 	cursor: pointer;
 	opacity: 0.7;
 	border-right: 2px dotted #444444;
-  }
+}
+
+
 
   
 
@@ -184,3 +191,4 @@ form {
 	text-decoration: none;
 	color: #ffffff;
 }
+

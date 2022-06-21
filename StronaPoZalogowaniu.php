@@ -40,7 +40,7 @@
 				</form>
 			</div>
 			<div class="option">
-				<a href="logout.php" class="tilelink">Wyloguj Sie</a>
+				<a href="logout.php" class="tilelink">Wyloguj Się</a>
 			</div>
 			<div class="option">Koszyk</div>
 			<div style="clear:both;"></div>
