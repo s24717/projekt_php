@@ -67,20 +67,36 @@
 		</div>
 		
 		<div id="sidebar">
-			<div class="optionL">Kategoria 1</div>
-			<div class="optionL">Kategoria 1</div>
-			<div class="optionL">Kategoria 1</div>
-			<div class="optionL">Kategoria 1</div>
-			<div class="optionL">Kategoria 1</div>
-			<div class="optionL">Kategoria 1</div>
+		<div class="optionL">
+			<a href="jedzenie.php" class="tilelink" style="color:black;">Jedzenie</a>
 		</div>
+		<div class="optionL">
+			<a href="elektronika.php" class="tilelink" style="color:black;">Elektronika</a>
+		</div>
+
+		
+		</div>
+      			
+				
+			
+		
 		
 		<div id="content">
 			<span class="bigtitle">Dlaczego SklepPro.pl?</span>
 			
 			<div class="dottedline"></div>
-			<?php  
-                $query = "SELECT * FROM produkty ORDER BY id_produkt ASC";  
+
+			<?php
+				if(isset($_SESSION['zapytanie']))
+				{
+					$query = "SELECT * FROM produkty WHERE produkty.kategoria ='" . $_SESSION['zapytanie'] . "'";
+					unset($_SESSION['zapytanie']);
+				}
+				else
+				{
+					$query = "SELECT * FROM produkty ORDER BY id_produkt ASC";
+				}
+                  
                 $result = mysqli_query($connect, $query);  
                 if(mysqli_num_rows($result) > 0)  
                 {  
@@ -88,15 +104,16 @@
                      {  
                 ?>  
                   
-                     <form method="post" action="koszyk.php?action=add&id=<?php echo $row["id_produkt"]; ?>" style="height: auto; width: 356px; display: inline-block;">
-                          <div style="border:10px solid #333; background-color:#f1f1f1; border-radius:5px; padding:16px; text-align: center; ">  
-                               <img src="<?php echo "img/".$row["image"]; ?>" class="img-responsive" /><br />  
+                     <form method="post" action="koszyk.php?action=add&id=<?php echo $row["id_produkt"];?>" style="height: auto; width: 356px; display: inline-block;">
+                          <div style="border:5px solid #128870; background-color:#f1f1f1; border-radius:5px; padding:16px; text-align: center; ">  
+                               <img src="<?php echo "img/".$row["image"]; ?>" class="img-responsive" style=" width: 100px; "/><br />  
                                <h4 class="text-info"><?php echo $row["nazwa"]; ?></h4>  
-                               <h4 class="text-danger">$ <?php echo $row["cena"]; ?></h4>  
+                               <h4 class="text-danger">$ <?php echo $row["cena"]; ?></h4>
+							   
                                <input type="text" name="quantity" class="form-control" value="1" /> 
                                <input type="hidden" name="hidden_name" value="<?php echo $row["nazwa"]; ?>" />  
-                               <input type="hidden" name="hidden_price" value="<?php echo $row["cena"]; ?>" />  
-                               <input type="submit" name="add_to_cart" style="margin-top:5px; width: 25px;" class="przycisk1" value="Add to Cart" />  
+                               <input type="hidden" name="hidden_price" value="<?php echo $row["cena"]; ?>" /><br>
+                               <input type="submit" name="add_to_cart" style="text-indent: 0px; width: 40px; border: none; background:none;" value="Dodaj"/>  
                           </div>  
                      </form>  
                  

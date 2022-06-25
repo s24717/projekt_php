@@ -40,7 +40,9 @@
             <div class="option">
                 <a href="zmien_email.php" class="tilelink">Zmien Email</a>
             </div>
-            <div class="option">Usun Konto</div>
+            <div class="option">
+                <a href="usun_konto.php" class="tilelink">Usun Konto</a>
+            </div>
             <div class="option">
              <a href="logout.php" class="tilelink">Wyloguj</a>
             </div>
@@ -54,7 +56,7 @@
 				<img src="img/ikona.png" />
 			</div>
 			<div id="topbarR">
-				<span class="bigtitle">Twoje Konto</span>
+				<span class="bigtitle">Witaj <?php echo $_SESSION['user']; ?></span>
 				<div style="height: 15px;"></div>
 				Tutaj zmienisz haslo,zobaczysz koszyk lub usuniesz konto!
 			</div>
@@ -64,7 +66,7 @@
 		
 		
 		<div id="content">
-        Twoj Koszyk
+        Twoj e-mail: <?php echo $_SESSION['email']; ?>
         
 			
 			

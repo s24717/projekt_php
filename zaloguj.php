@@ -35,8 +35,11 @@
             if($ilu_userow>0)
             {   
                 $_SESSION['zalogowany'] = true;
+                
                 $wiersz = $rezultat->fetch_assoc();
                 //$_SESSION['user'] = $wiersz['user']; //jedna z kolumn z baz danych w zmiennej globalnej session potem mozna dodawac(do zmiany)
+                $_SESSION['user'] = $wiersz['user'];
+                $_SESSION['email'] = $wiersz['email'];
                 unset($_SESSION['blad']);//wywala zmienna globalna "blad" (zrobiona zeby po zalogowaniu zostala usunieta w razie gdy next login)
                 $rezultat->close();
                 header('Location: StronaPoZalogowaniu.php');  

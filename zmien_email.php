@@ -72,7 +72,8 @@
 					//dodajemy gracza do bazy
 					
 					if($polaczenie->query("UPDATE `uzytkownicy` SET `email` = '$email1' WHERE `uzytkownicy`.`user` = '$login1'"))
-					{                           
+					{       
+                        $_SESSION['email'] = $email1;                     
 						header('Location: konto.php');
 					}
 					else
