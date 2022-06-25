@@ -38,13 +38,7 @@
 		
 		<div id="menu">
 			<div class="option">Strona główna</div>
-			<div class ="formularz">
-				<form action="howno.php" method="post">
-					<input type="text" class="wyszukiwarka" name="wyszukiwarka" placeholder="Wyszukaj..."/>
-            		<input type="submit" value=""/>
-				
-				</form>
-			</div>
+			
 			<div class="option">
 				<a href="logout.php" class="tilelink">Wyloguj</a>
 			</div>
@@ -73,6 +67,9 @@
 		<div class="optionL">
 			<a href="elektronika.php" class="tilelink" style="color:black;">Elektronika</a>
 		</div>
+		<div class="optionL">
+			Cena
+		</div>
 
 		
 		</div>
@@ -82,7 +79,7 @@
 		
 		
 		<div id="content">
-			<span class="bigtitle">Dlaczego SklepPro.pl?</span>
+			<span class="bigtitle">Wybierz Produkt!</span>
 			
 			<div class="dottedline"></div>
 

@@ -36,13 +36,7 @@
 		
 		<div id="menu">
 			<div class="option">Strona główna</div>
-			<div class ="formularz">
-				<form action="howno.php" method="post">
-					<input type="text" class="wyszukiwarka" name="wyszukiwarka" placeholder="Wyszukaj..."/>
-            		<input type="submit" value=""/>
-				
-				</form>
-			</div>
+			
 			<div class="option">
 				<a href="logowanie.php" class="tilelink">Logowanie</a>
 			</div>

@@ -39,10 +39,20 @@
                 $wiersz = $rezultat->fetch_assoc();
                 //$_SESSION['user'] = $wiersz['user']; //jedna z kolumn z baz danych w zmiennej globalnej session potem mozna dodawac(do zmiany)
                 $_SESSION['user'] = $wiersz['user'];
+                $_SESSION['pass'] = $wiersz['pass'];
                 $_SESSION['email'] = $wiersz['email'];
                 unset($_SESSION['blad']);//wywala zmienna globalna "blad" (zrobiona zeby po zalogowaniu zostala usunieta w razie gdy next login)
                 $rezultat->close();
-                header('Location: StronaPoZalogowaniu.php');  
+                if($_SESSION['user']=="admin" && $_SESSION['pass']=="admin1")
+                {   
+                    $_SESSION['admin'] = true;
+                    header('Location: admin.php');
+                }
+                else
+                {
+                    header('Location: StronaPoZalogowaniu.php');  
+                }
+                 
             }
             else
             {
