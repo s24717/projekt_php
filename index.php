@@ -1,8 +1,6 @@
 <?php
     session_start();
 
-	
-	$connect = mysqli_connect("localhost", "root", "", "osadnicy");
 	if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
 	{
 		header('Location: StronaPoZalogowaniu.php');
@@ -76,35 +74,11 @@
 		</div>
 		
 		<div id="content">
-			<span class="bigtitle">Dlaczego SklepPro.pl?</span>
+			<span class="bigtitle">Zaloguj sie by zobaczyc sklep</span>
 			
-			<div class="dottedline"></div>
 			
-			<?php  
-                $query = "SELECT * FROM produkty ORDER BY id_produkt ASC";  
-                $result = mysqli_query($connect, $query);  
-                if(mysqli_num_rows($result) > 0)  
-                {  
-                     while($row = mysqli_fetch_array($result))  
-                     {  
-                ?>  
-                  
-                     <form method="post" action="index.php?action=add&id=<?php echo $row["id_produkt"]; ?>" style="height: 500px; width: 356px; display: inline-block;">  
-                          <div style="border:10px solid #333; background-color:#f1f1f1; border-radius:5px; padding:16px; text-align: center; ">  
-                               <img src="<?php echo "img/".$row["image"]; ?>" class="img-responsive" /><br />  
-                               <h4 class="text-info"><?php echo $row["nazwa"]; ?></h4>  
-                               <h4 class="text-danger">$ <?php echo $row["cena"]; ?></h4>  
-                               <input type="text" name="quantity" class="form-control" value="1" />  
-                               <input type="hidden" name="hidden_name" value="<?php echo $row["nazwa"]; ?>" />  
-                               <input type="hidden" name="hidden_price" value="<?php echo $row["cena"]; ?>" />  
-                               <input type="submit" name="add_to_cart" style="margin-top:5px; width: 40px;" class="przycisk1" value="Add to Cart" />  
-                          </div>  
-                     </form>  
-                 
-                <?php  
-                     }  
-                }  
-                ?> 
+			
+			
 		</div>	
 		
 		<div id="footer">

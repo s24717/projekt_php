@@ -1,5 +1,11 @@
 <?php
     session_start();
+
+	//laczenie z baza danych po naci
+	$connect = mysqli_connect("localhost", "root", "", "osadnicy");
+	//zmienne sa dostarczone po przez formularz
+	
+
     if(!isset($_SESSION['zalogowany']))
     {
         header('Location: index.php');
@@ -40,9 +46,11 @@
 				</form>
 			</div>
 			<div class="option">
-				<a href="logout.php" class="tilelink">Wyloguj Się</a>
+				<a href="logout.php" class="tilelink">Wyloguj</a>
 			</div>
-			<div class="option">Koszyk</div>
+			<div class="option">
+				<a href="konto.php" class="tilelink">Moje Konto</a>
+			</div>
 			<div style="clear:both;"></div>
 		</div>
 		
@@ -71,14 +79,33 @@
 			<span class="bigtitle">Dlaczego SklepPro.pl?</span>
 			
 			<div class="dottedline"></div>
+			<?php  
+                $query = "SELECT * FROM produkty ORDER BY id_produkt ASC";  
+                $result = mysqli_query($connect, $query);  
+                if(mysqli_num_rows($result) > 0)  
+                {  
+                     while($row = mysqli_fetch_array($result))  
+                     {  
+                ?>  
+                  
+                     <form method="post" action="koszyk.php?action=add&id=<?php echo $row["id_produkt"]; ?>" style="height: auto; width: 356px; display: inline-block;">
+                          <div style="border:10px solid #333; background-color:#f1f1f1; border-radius:5px; padding:16px; text-align: center; ">  
+                               <img src="<?php echo "img/".$row["image"]; ?>" class="img-responsive" /><br />  
+                               <h4 class="text-info"><?php echo $row["nazwa"]; ?></h4>  
+                               <h4 class="text-danger">$ <?php echo $row["cena"]; ?></h4>  
+                               <input type="text" name="quantity" class="form-control" value="1" /> 
+                               <input type="hidden" name="hidden_name" value="<?php echo $row["nazwa"]; ?>" />  
+                               <input type="hidden" name="hidden_price" value="<?php echo $row["cena"]; ?>" />  
+                               <input type="submit" name="add_to_cart" style="margin-top:5px; width: 25px;" class="przycisk1" value="Add to Cart" />  
+                          </div>  
+                     </form>  
+                 
+                <?php  
+                     }  
+                }  
+                ?> 
 			
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia mollis odio eu bibendum. Praesent non hendrerit risus. Nulla id semper sem. Mauris risus mauris, ultrices sed ullamcorper sed, vulputate vel nisi. Aliquam augue ante, mattis in pulvinar vitae, ultrices nec leo. Nulla ultricies augue enim, sit amet semper tellus vulputate sit amet. Maecenas tincidunt, ex eu viverra scelerisque, quam lectus auctor nunc, at pretium nibh lacus in ligula. Cras condimentum felis ac aliquet tristique. Sed elementum eu nulla vel rutrum. Cras feugiat nulla non congue malesuada.
-			
-			<br /><br />
-			Cras et nulla vehicula, efficitur enim non, fermentum tortor. Curabitur id elementum leo. Sed eget turpis accumsan dolor mollis imperdiet. Praesent pellentesque laoreet lectus, at commodo magna varius vitae. Aliquam erat volutpat. Curabitur commodo, tortor laoreet sagittis cursus, nulla enim laoreet libero, et egestas risus ante vel orci. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc quis posuere massa, sed sollicitudin lorem. Mauris lacinia, massa efficitur malesuada luctus, arcu ex mattis erat, a venenatis magna risus nec neque. Nulla vulputate nisl urna, quis egestas orci suscipit tristique. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras auctor nec elit at ultricies. Morbi aliquam pharetra diam, vitae porta felis. Pellentesque vel arcu tincidunt, luctus justo quis, ultrices erat. Vivamus efficitur leo vitae dui molestie, eu varius sapien iaculis. In quis pharetra mauris.
-			
-			<br /><br />			
-			Nam ullamcorper turpis non tristique sollicitudin. Etiam id magna lacus. Pellentesque vestibulum ex eget quam consectetur, sit amet luctus erat feugiat. Sed gravida tellus tempus consequat rhoncus. Phasellus lobortis magna et risus pharetra, facilisis blandit sapien tristique. Vivamus aliquam interdum arcu, eget facilisis ante gravida ut. Proin nec nisl ut lacus finibus sagittis id non nibh. Donec volutpat pretium libero. Sed fermentum vel ante vitae mattis. Curabitur porttitor turpis at scelerisque auctor. Sed vitae iaculis risus, ut iaculis nibh.
+			  
 		</div>	
 		
 		<div id="footer">
