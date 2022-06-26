@@ -67,9 +67,15 @@
 		<div class="optionL">
 			<a href="elektronika.php" class="tilelink" style="color:black;">Elektronika</a>
 		</div>
-		<div class="optionL">
+		<form method="post" class="optionL" style="border: none; height:50px;">
 			Cena
-		</div>
+			<br>
+			Od
+			<input style="width: 20px;" name="login1" type="text" placeholder="">
+			Do
+			<input style="width: 20px;" name="login1" type="text" placeholder="">
+			<input type="submit" value="Szukaj"/>
+		</form>
 
 		
 		</div>

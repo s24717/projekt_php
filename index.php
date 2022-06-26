@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+	$connect = mysqli_connect("localhost", "root", "", "osadnicy");
 	if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
 	{
 		header('Location: StronaPoZalogowaniu.php');
@@ -38,10 +38,10 @@
 			<div class="option">Strona główna</div>
 			
 			<div class="option">
-				<a href="logowanie.php" class="tilelink">Logowanie</a>
+				<a href="zaloguj.php" class="tilelink">Zaloguj sie</a>
 			</div>
 			<div class="option">
-			<a href="rejestracja.php" class="tilelink">Rejestracja</a>
+				<a href="rejestracja.php" class="tilelink">Rejestracja</a>
 			</div>
 			<div style="clear:both;"></div>
 		</div>
@@ -59,20 +59,65 @@
 		</div>
 		
 		<div id="sidebar">
-			<div class="optionL">Kategoria 1</div>
-			<div class="optionL">Kategoria 1</div>
-			<div class="optionL">Kategoria 1</div>
-			<div class="optionL">Kategoria 1</div>
-			<div class="optionL">Kategoria 1</div>
-			<div class="optionL">Kategoria 1</div>
+		<div class="optionL">
+			<a href="jedzenie.php" class="tilelink" style="color:black;">Jedzenie</a>
 		</div>
+		<div class="optionL">
+			<a href="elektronika.php" class="tilelink" style="color:black;">Elektronika</a>
+		</div>
+		<div class="optionL">
+			Cena
+		</div>
+
+		
+		</div>
+      			
+				
+			
+		
 		
 		<div id="content">
-			<span class="bigtitle">Zaloguj sie by zobaczyc sklep</span>
+			<span class="bigtitle">Zaloguj sie!</span>
 			
+			<div class="dottedline"></div>
+
+			<?php
+				if(isset($_SESSION['zapytanie']))
+				{
+					$query = "SELECT * FROM produkty WHERE produkty.kategoria ='" . $_SESSION['zapytanie'] . "'";
+					unset($_SESSION['zapytanie']);
+				}
+				else
+				{
+					$query = "SELECT * FROM produkty ORDER BY id_produkt ASC";
+				}
+                  
+                $result = mysqli_query($connect, $query);  
+                if(mysqli_num_rows($result) > 0)  
+                {  
+                     while($row = mysqli_fetch_array($result))  
+                     {  
+                ?>  
+                  
+                     <form method="post" action="koszyk.php?action=add&id=<?php echo $row["id_produkt"];?>" style="height: auto; width: 356px; display: inline-block;">
+                          <div style="border:5px solid #128870; background-color:#f1f1f1; border-radius:5px; padding:16px; text-align: center; ">  
+                               <img src="<?php echo "img/".$row["image"]; ?>" class="img-responsive" style=" width: 100px; "/><br />  
+                               <h4 class="text-info"><?php echo $row["nazwa"]; ?></h4>  
+                               <h4 class="text-danger">$ <?php echo $row["cena"]; ?></h4>
+							   
+                               
+                               <input type="hidden" name="hidden_name" value="<?php echo $row["nazwa"]; ?>" />  
+                               <input type="hidden" name="hidden_price" value="<?php echo $row["cena"]; ?>" /><br>
+                               
+                          </div>  
+                     </form>  
+                 
+                <?php  
+                     }  
+                }  
+                ?> 
 			
-			
-			
+			  
 		</div>	
 		
 		<div id="footer">
