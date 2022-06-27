@@ -65,9 +65,21 @@
 		<div class="optionL">
 			<a href="elektronika.php" class="tilelink" style="color:black;">Elektronika</a>
 		</div>
-		<div class="optionL">
+		<form method="post" class="optionL" action="cena.php" style=" height:62px;">
 			Cena
-		</div>
+			<br>
+			Od
+			<input style="width: 20px;" name="cena1" type="text" placeholder="">
+			Do
+			<input style="width: 20px;" name="cena2" type="text" placeholder="">
+			<input type="submit" value="Szukaj"/>
+		</form>
+		<?php if(isset($_SESSION['cena_blad']))
+				{
+					echo $_SESSION['cena_blad'];
+					unset($_SESSION['cena_blad']);
+				}
+		?>
 
 		
 		</div>
@@ -86,6 +98,11 @@
 				{
 					$query = "SELECT * FROM produkty WHERE produkty.kategoria ='" . $_SESSION['zapytanie'] . "'";
 					unset($_SESSION['zapytanie']);
+				}
+				else if(isset(($_SESSION['cena'])))
+				{
+					$query = $_SESSION['cena'];
+					unset($_SESSION['cena']);
 				}
 				else
 				{
@@ -114,7 +131,11 @@
                  
                 <?php  
                      }  
-                }  
+                } 
+				else
+				{
+					echo "Brak Produktow";
+				}  
                 ?> 
 			
 			  

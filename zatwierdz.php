@@ -1,12 +1,34 @@
 <?php
     session_start();
 	require_once "koszyk.php";
+
+    if((!isset($_SESSION['zalogowany'])) && (!$_SESSION['zalogowany']==true))
+	{
+		header('Location: logowanie.php');
+		exit();
+	}
+
+    if((!isset($_SESSION['walidacja'])) && (!$_SESSION['walidacja']==true))
+	{
+		header('Location: konto.php');
+		exit();
+	}
 	
 
+    if(isset($_POST['zatwierdzenie']))
+    {
+        unset($_SESSION['imieform']);
+        unset($_SESSION['nazwiskoform']);
+        unset($_SESSION['kategoriaform']);
+        unset($_SESSION['emailform']);
+        unset($_SESSION["shopping_cart"]);
+        unset($_SESSION['walidacja']);
+        $_SESSION['informacja']= '<span style="color:green">Wyslales zakupy na podany adress</span>';
+        header('Location: konto.php');
+
+    }
 
 ?>
-
-
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
@@ -58,7 +80,7 @@
 			<div id="topbarR">
 				<span class="bigtitle">Witaj <?php echo $_SESSION['user']; ?></span>
 				<div style="height: 15px;"></div>
-				Tutaj zmienisz haslo,zobaczysz koszyk lub usuniesz konto!
+				Zatwierdz by zamowic
 			</div>
 			<div style="clear:both;"></div>
 		</div>
@@ -66,11 +88,21 @@
 		
 		
 		<div id="content">
-        Twoj e-mail: <?php echo $_SESSION['email']; ?>
+        
 		<div style="clear:both"></div>  
                 <br />  
-                <h3>Twoj Koszyk</h3>  
+                
+                <h3>Twoje Dane Wysylkowe, ackeptuj by kupic</h3> 
+                <td>Twoje imie: <?php echo $_SESSION['imieform'];?></td>
+                <br>
+                <td>Twoje nazwisko: <?php echo $_SESSION['nazwiskoform'];?></td>
+                <br>
+                <td>Twoj E-mail: <?php echo $_SESSION['emailform'];?></td>
+                <br>
+                <td>Sposob w jaki wyslac: <?php echo $_SESSION['kategoriaform'];?></td> 
+                <br>
                 <div class="table-responsive">  
+                    
                      <table class="table table-bordered">  
                           <tr>  
                                <th width="40%">Nazwa Produktu</th>  
@@ -93,7 +125,7 @@
                                <td><?php echo $values["item_quantity"]; ?></td>  
                                <td><?php echo $values["item_price"]; ?>zl</td>  
                                <td><?php echo number_format($values["item_quantity"] * $values["item_price"], 2); ?>zl</td>  
-                               <td><a href="konto.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">usun</span></a></td>  
+                                
                           </tr>  
                           <?php  
                                     $total = $total + ($values["item_quantity"] * $values["item_price"]);  
@@ -102,6 +134,7 @@
                           <tr>  
                                <td colspan="3" align="right">Razem Do zaplaty</td>  
                                <td align="right"><?php echo number_format($total, 2); ?>zl</td>
+                               
 							     
                                <td></td> 
 							   
@@ -110,16 +143,13 @@
                           }  
                           ?>  
                      </table>
-					 <a href="formularz.php" class="tilelink" style="color:black; border:5px solid #128870;">Przejdz do formularza dostaw</a>
-                          <br>
-                          <br>
-                          <?php
-                              if(isset($_SESSION['informacja']))
-                              {
-                                   echo $_SESSION['informacja'];
-                                   unset($_SESSION['informacja']);
-                              }
-                          ?>
+                     <form method="post">
+                     <input type="hidden" name="zatwierdzenie"/>  
+                     <input type="submit" value="Zatwierdz" style="border: none; background: none; text-indent: 0px; width: 60px; color: black;"/>
+
+
+                    </form>
+					 
                 </div>  
            </div>
         
